@@ -1,0 +1,40 @@
+{
+  "voice": { "lengthScale": 1.08 },
+  "subtitleStyle": "navy",
+  "scenes": [
+    {
+      "id": "intro",
+      "type": "intro",
+      "data": {
+        "logo": null,
+        "brand": "TC Service &amp; Repair",
+        "claim": "Reparieren können viele. <span>Wir können mehr.</span>",
+        "claimCue": 1,
+        "servicesLine": "Reparatur · Service · Beratung"
+      },
+      "lines": [
+        { "sub": "Willkommen bei TC Service & Repair in Koblenz.", "say": "Willkommen bei Tee Zeh Service und Ripähr in Koblenz." },
+        { "sub": "Reparieren können viele. Wir können mehr.", "say": "Reparieren können viele. Wir können mehr." }
+      ]
+    },
+    {
+      "id": "stats",
+      "type": "stats",
+      "data": {
+        "eyebrow": "Auf einen Blick",
+        "title": "Ein Ansprechpartner für Ihre Technik",
+        "items": [
+          { "value": 0, "suffix": "", "label": "Hersteller", "sub": "PLATZHALTER", "cue": 1 },
+          { "value": 0, "suffix": "", "label": "Gerätekategorien", "sub": "PLATZHALTER", "cue": 2 }
+        ],
+        "brands": [],
+        "brandsCue": 1
+      },
+      "lines": [
+        { "sub": "Ihr technischer Ansprechpartner für den ganzen Lebenszyklus Ihrer Geräte.", "say": "Ihr technischer Ansprechpartner für den ganzen Lebenszyklus Ihrer Geräte." },
+        { "sub": "PLATZHALTER Hersteller", "say": "PLATZHALTER" },
+        { "sub": "PLATZHALTER Kategorien", "say": "PLATZHALTER" }
+      ]
+    }
+  ]
+}

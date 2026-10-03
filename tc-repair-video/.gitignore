@@ -1,0 +1,6 @@
+voice/
+build/tts/
+build/narration_raw.wav
+build/still_*.png
+node_modules/
+build/

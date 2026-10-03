@@ -251,11 +251,15 @@
       sc.node.style.visibility = o > 0 ? 'visible' : 'hidden';
       if (o > 0) sc.els.forEach((e) => applyEl(e, t));
     }
-    let cur = null;
-    for (const c of cues) if (t >= c.start && t < c.end) { cur = c; break; }
-    if (cur) {
+    // Untertitel: direkte Wechsel zwischen aufeinanderfolgenden Einblendungen, Fade nur an Pausen
+    let ci = -1;
+    for (let i = 0; i < cues.length; i++) if (t >= cues[i].start && t < cues[i].end) { ci = i; break; }
+    if (ci >= 0) {
+      const cur = cues[ci], prev = cues[ci - 1], next = cues[ci + 1];
       if (subsBox.textContent !== cur.text) subsBox.textContent = cur.text;
-      subsBox.style.opacity = Math.min(clamp((t - cur.start) / 0.12), clamp((cur.end - t) / 0.12));
+      const fin = prev && cur.start - prev.end < 0.3 ? 1 : clamp((t - cur.start) / 0.15);
+      const fout = next && next.start - cur.end < 0.3 ? 1 : clamp((cur.end - t) / 0.15);
+      subsBox.style.opacity = Math.min(fin, fout);
     } else subsBox.style.opacity = 0;
   };
   window.VIDEO_DURATION = timeline.duration;
