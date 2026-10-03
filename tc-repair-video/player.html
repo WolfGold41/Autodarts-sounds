@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>TC Service &amp; Repair – Motion Video</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  :root {
+    --navy: #101E33; --navy-deep: #0A1524; --blue: #2E7FD1; --light-blue: #5AA9F0;
+    --text-light: #C8D9EA; --text-mid: #8FBFEA; --white: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--navy); }
+  body { font-family: 'Inter', Arial, Helvetica, sans-serif; color: var(--white); }
+  #stage {
+    position: relative; width: 1920px; height: 1080px; overflow: hidden;
+    background: radial-gradient(ellipse at 50% 42%, var(--navy) 55%, var(--navy-deep) 100%);
+  }
+  .scene { position: absolute; inset: 0; opacity: 0; }
+  .el { will-change: transform, opacity; }
+
+  /* Leiterbahn: Vollton #2E7FD1, orthogonal/45°, in Ecke verankert, kein Glow */
+  .trace { position: absolute; color: var(--blue); pointer-events: none; }
+  .trace svg { display: block; width: 100%; height: 100%; }
+  .trace--tl { top: -2px; left: -2px; width: 760px; height: 470px; }
+  .trace--br { right: -2px; bottom: -2px; width: 760px; height: 470px; transform: rotate(180deg); }
+
+  .eyebrow {
+    font-family: 'Inter'; font-weight: 600; font-size: 25px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--text-mid);
+  }
+  .h1 {
+    font-family: 'Montserrat', Arial, sans-serif; font-weight: 800; font-size: 88px; line-height: 1.05;
+    background: linear-gradient(180deg, #FFFFFF 0%, #D9D9D9 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    white-space: nowrap;
+  }
+  .h2 {
+    font-family: 'Montserrat', Arial, sans-serif; font-weight: 800; font-size: 64px; line-height: 1.1;
+    background: linear-gradient(180deg, #FFFFFF 0%, #D9D9D9 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    white-space: nowrap;
+  }
+  .lead { font-weight: 500; font-size: 31px; line-height: 1.45; color: var(--text-light); }
+  .rule { height: 4px; width: 120px; background: var(--blue); }
+
+  .wrap { position: absolute; left: 160px; right: 160px; top: 150px; }
+
+  /* Intro */
+  .intro-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; padding-bottom: 120px; }
+  .logo-img { width: 620px; height: auto; display: block; }
+  .brand-fallback { font-family: 'Montserrat'; font-weight: 800; font-size: 96px; letter-spacing: .01em; }
+  .claim { font-family: 'Montserrat'; font-weight: 700; font-size: 49px; color: var(--white); white-space: nowrap; }
+  .claim span { color: var(--light-blue); }
+  .services-line { font-weight: 600; font-size: 31px; letter-spacing: .12em; color: var(--text-mid); text-transform: uppercase; }
+
+  /* Stats */
+  .stats { display: flex; gap: 48px; margin-top: 72px; }
+  .stat {
+    flex: 1; border: 2px solid rgba(46,127,209,.55); border-radius: 18px; padding: 44px 48px;
+    background: rgba(10,21,36,.55);
+  }
+  .stat .num { font-family: 'Montserrat'; font-weight: 800; font-size: 150px; line-height: 1; color: var(--white); font-variant-numeric: tabular-nums; }
+  .stat .num small { font-size: 90px; color: var(--light-blue); }
+  .stat .lbl { margin-top: 18px; font-weight: 600; font-size: 39px; color: var(--text-light); }
+  .stat .sub { margin-top: 10px; font-weight: 500; font-size: 25px; color: var(--text-mid); line-height: 1.4; }
+
+  .brands { display: flex; flex-wrap: wrap; gap: 14px 18px; margin-top: 40px; max-width: 1600px; }
+  .brand-chip {
+    font-weight: 600; font-size: 25px; color: var(--text-light); padding: 10px 22px;
+    border: 1.5px solid rgba(143,191,234,.35); border-radius: 999px;
+  }
+
+  /* Grid (Kategorien) */
+  .grid { display: grid; gap: 28px; margin-top: 64px; }
+  .card {
+    border: 2px solid rgba(46,127,209,.5); border-radius: 18px; padding: 34px 30px 30px;
+    background: rgba(10,21,36,.55); display: flex; flex-direction: column; gap: 22px; min-height: 250px;
+  }
+  .card svg { width: 84px; height: 84px; color: var(--blue); }
+  .card .t { font-weight: 700; font-size: 31px; line-height: 1.2; }
+  .card .d { font-weight: 500; font-size: 22px; line-height: 1.4; color: var(--text-mid); }
+
+  /* Chips (Reparaturarten) */
+  .chips { display: grid; gap: 22px 26px; margin-top: 60px; }
+  .chip {
+    display: flex; align-items: center; gap: 22px; padding: 24px 28px;
+    border: 2px solid rgba(46,127,209,.45); border-radius: 14px; background: rgba(10,21,36,.5);
+  }
+  .chip .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--blue); flex: none; }
+  .chip .t { font-weight: 600; font-size: 31px; }
+
+  /* Steps (Ablauf) */
+  .steps { position: relative; display: grid; margin-top: 90px; }
+  .steps .line { position: absolute; left: 0; right: 0; top: 46px; height: 4px; background: var(--blue); transform-origin: left center; }
+  .step { position: relative; padding-right: 30px; }
+  .step .n {
+    width: 96px; height: 96px; border-radius: 50%; background: var(--navy); border: 4px solid var(--blue);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Montserrat'; font-weight: 800; font-size: 39px; color: var(--white);
+  }
+  .step .t { margin-top: 34px; font-weight: 700; font-size: 31px; line-height: 1.2; }
+  .step .d { margin-top: 14px; font-weight: 500; font-size: 23px; line-height: 1.45; color: var(--text-light); }
+
+  /* Owner */
+  .owner { position: absolute; inset: 0; display: flex; align-items: center; padding: 0 160px 120px; gap: 110px; }
+  .portrait-frame {
+    width: 560px; height: 700px; flex: none; position: relative; border-radius: 22px; overflow: hidden;
+    border: 2px solid rgba(46,127,209,.6); background: var(--navy-deep);
+  }
+  .portrait-frame img { position: absolute; left: 50%; bottom: 0; height: 100%; transform: translateX(-50%); }
+  .portrait-frame .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat'; font-weight: 800; font-size: 160px; color: var(--blue); }
+  .owner .name { font-family: 'Montserrat'; font-weight: 800; font-size: 76px; margin-top: 18px; white-space: nowrap; }
+  .owner .role { font-weight: 600; font-size: 31px; color: var(--light-blue); margin-top: 10px; }
+  .owner ul { list-style: none; margin-top: 44px; display: flex; flex-direction: column; gap: 22px; }
+  .owner li { display: flex; gap: 20px; align-items: baseline; font-weight: 500; font-size: 31px; color: var(--text-light); line-height: 1.35; }
+  .owner li::before { content: ''; width: 14px; height: 14px; background: var(--blue); border-radius: 50%; flex: none; transform: translateY(-3px); }
+
+  /* Outro */
+  .outro { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; padding-bottom: 150px; text-align: center; }
+  .cta {
+    display: inline-block; background: var(--light-blue); color: var(--navy); font-weight: 700; font-size: 39px;
+    padding: 22px 54px; border-radius: 14px;
+  }
+  .contact-row { display: flex; gap: 70px; font-weight: 600; font-size: 31px; color: var(--text-light); }
+  .contact-row b { color: var(--white); font-weight: 700; }
+  .domain { font-weight: 700; font-size: 49px; color: var(--light-blue); letter-spacing: .02em; }
+
+  /* Untertitel: Inter, navyblau hinterlegt, unterer Bildrand */
+  #subs { position: absolute; left: 0; right: 0; bottom: 56px; display: flex; justify-content: center; pointer-events: none; z-index: 50; }
+  #subs .box {
+    max-width: 1560px; padding: 16px 34px 18px; border-radius: 12px;
+    background: rgba(10,21,36,.94); border: 2px solid var(--blue);
+    font-family: 'Inter', Arial, sans-serif; font-weight: 600; font-size: 42px; line-height: 1.32;
+    color: var(--white); text-align: center; opacity: 0;
+  }
+  #subs.light .box { background: var(--light-blue); color: var(--navy); border-color: var(--light-blue); }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div id="subs"><div class="box"></div></div>
+<script src="player.js"></script>
+</body>
+</html>
