@@ -50,27 +50,24 @@ def read_wav(path):
 
 
 def split_cue(text):
-    """Teilt einen Satz in lesbare Untertitel-Häppchen (an Satzzeichen, sonst an Wortgrenzen)."""
+    """Teilt einen Satz in ausgewogene Untertitel-Häppchen; bevorzugt Brüche nach Satzzeichen."""
     if len(text) <= MAX_CUE_CHARS:
         return [text]
-    parts = re.split(r"(?<=[,;:–—])\s+", text)
-    chunks, cur = [], ""
-    for p in parts:
-        if cur and len(cur) + 1 + len(p) > MAX_CUE_CHARS:
-            chunks.append(cur)
-            cur = p
-        else:
-            cur = f"{cur} {p}".strip()
-    if cur:
-        chunks.append(cur)
-    out = []
-    for c in chunks:
-        while len(c) > MAX_CUE_CHARS:
-            cut = c.rfind(" ", 0, MAX_CUE_CHARS)
-            out.append(c[:cut])
-            c = c[cut + 1:]
-        out.append(c)
-    return out
+    n = -(-len(text) // MAX_CUE_CHARS)
+    target = len(text) / n
+    best, best_cost = None, None
+    for i, ch in enumerate(text):
+        if ch != " ":
+            continue
+        left, right = text[:i], text[i + 1:]
+        if len(left) > MAX_CUE_CHARS:
+            break
+        cost = abs(len(left) - target) - (24 if left[-1] in ",;:" else 0)
+        if right.split(" ")[0] in ("und", "oder", "mit", "dazu"):
+            cost -= 6
+        if best_cost is None or cost < best_cost:
+            best, best_cost = i, cost
+    return [text[:best]] + split_cue(text[best + 1:])
 
 
 def srt_time(t):

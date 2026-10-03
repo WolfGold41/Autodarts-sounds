@@ -34,7 +34,7 @@
       "id": "intro",
       "type": "intro",
       "data": {
-        "logo": "assets/logo.png",
+        "logo": "assets/logo.svg",
         "brand": "TC Service &amp; Repair",
         "claim": "Reparieren können viele. <span>Wir können mehr.</span>",
         "claimCue": 1,
@@ -205,7 +205,7 @@
       "id": "kontakt",
       "type": "outro",
       "data": {
-        "logo": "assets/logo.png",
+        "logo": "assets/logo.svg",
         "brand": "TC Service &amp; Repair",
         "claim": "Reparieren können viele. Wir können mehr.",
         "cta": "Termin anfragen",

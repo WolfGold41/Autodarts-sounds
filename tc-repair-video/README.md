@@ -9,7 +9,7 @@ Alle Texte und Fakten stammen von tc-repair.de. Die Zahlen sind ausgezählt:
 
 ## Anpassen und neu rendern
 1. Texte und Szenen in `content.json` ändern. `sub` ist der Untertitel, `say` die optionale Sprechfassung, `lexicon` regelt die Aussprache.
-2. Logo und Porträt einbinden: `assets/logo.png` (transparent) und `assets/portrait.png` ablegen. Sie werden automatisch verwendet; ohne die Dateien gibt es einen Text-Fallback bzw. eine Kennzahlen-Spalte.
+2. Logo und Porträt: `assets/logo.svg` (weiße Fassung für Navy) und `assets/portrait.png` (freigestellt). Fehlen die Dateien, nutzt der Player einen Text-Fallback bzw. eine Kennzahlen-Spalte.
 3. Stimme: `voice/de-thorsten-low.onnx` von https://github.com/rhasspy/piper/releases/download/v0.0.2/voice-de-thorsten-low.tar.gz, dazu `pip install piper-tts`.
 4. `python3 build_audio.py` erzeugt Sprecherspur, Timing und SRT.
 5. `node render.mjs` erzeugt das MP4 (Playwright/Chromium + ffmpeg). Standbilder zum Prüfen: `node render.mjs --still 5,30`.
