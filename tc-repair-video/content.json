@@ -1,39 +1,224 @@
 {
-  "voice": { "lengthScale": 1.08 },
+  "_quelle": "Texte und Fakten aus den Seiten von tc-repair.de (Stand Builder-Livesite / WordPress-Neuaufbau, Sept. 2026). Hersteller- und Kategorienzahl = Anzahl der auf der Website namentlich genannten Hersteller bzw. Gerätekategorien.",
+  "voice": { "lengthScale": 1.06 },
   "subtitleStyle": "navy",
+  "lexicon": {
+    "TC": "Tee Zeh",
+    "Repair": "[[ rɪpˈɛːɐ ]]",
+    "iPhones": "Ei-Fohns",
+    "iPhone": "Ei-Fohn",
+    "iPads": "Ei-Päds",
+    "Smartphones": "Smartfohns",
+    "Smartwatches": "[[ smˈaːɐtvɔtʃəs ]]",
+    "Notebooks": "Nohtbucks",
+    "Notebook": "Nohtbuck",
+    "Xiaomi": "Schaomi",
+    "Huawei": "[[ xuˈaːvɛɪ ]]",
+    "Acer": "[[ ˈeːsɐ ]]",
+    "Display": "[[ dɪsplˈeː ]]",
+    "Displaytausch": "[[ dɪsplˈeːtaʊʃ ]]",
+    "Backcover": "[[ bˈɛkkavɐ ]]",
+    "Malware": "[[ mˈɛlvɛːɐ ]]",
+    "Software": "[[ zˈɔftvɛːɐ ]]",
+    "Refurbished": "[[ rifˈœːɐbɪʃt ]]",
+    "Express-Service": "Express-Service",
+    "B2B": "Bie tu Bie",
+    "ESG": "Eh Es Geh",
+    "SSD": "Es Es Deh",
+    "PCs": "[[ peːtsˈeːs ]]",
+    "PC": "[[ peːtsˈeː ]]",
+    "tc-repair.de": "Tee Zeh Minus [[ rɪpˈɛːɐ ]] Punkt Deh Eh"
+  },
   "scenes": [
     {
       "id": "intro",
       "type": "intro",
       "data": {
-        "logo": null,
+        "logo": "assets/logo.png",
         "brand": "TC Service &amp; Repair",
         "claim": "Reparieren können viele. <span>Wir können mehr.</span>",
         "claimCue": 1,
         "servicesLine": "Reparatur · Service · Beratung"
       },
       "lines": [
-        { "sub": "Willkommen bei TC Service & Repair in Koblenz.", "say": "Willkommen bei Tee Zeh Service und Ripähr in Koblenz." },
-        { "sub": "Reparieren können viele. Wir können mehr.", "say": "Reparieren können viele. Wir können mehr." }
+        { "sub": "Willkommen bei TC Service & Repair in Koblenz." },
+        { "sub": "Reparieren können viele. Wir können mehr." }
       ]
     },
     {
-      "id": "stats",
+      "id": "zahlen",
       "type": "stats",
       "data": {
         "eyebrow": "Auf einen Blick",
-        "title": "Ein Ansprechpartner für Ihre Technik",
+        "title": "Herstellerunabhängig. Für fast alles.",
         "items": [
-          { "value": 0, "suffix": "", "label": "Hersteller", "sub": "PLATZHALTER", "cue": 1 },
-          { "value": 0, "suffix": "", "label": "Gerätekategorien", "sub": "PLATZHALTER", "cue": 2 }
+          { "value": 13, "label": "Hersteller", "sub": "namentlich auf tc-repair.de genannt", "cue": 1 },
+          { "value": 6, "label": "Gerätekategorien", "sub": "vom Smartphone bis zur Konsole", "cue": 3 }
         ],
-        "brands": [],
-        "brandsCue": 1
+        "brands": ["Apple", "Samsung", "Xiaomi", "Google", "Huawei", "Sony", "Lenovo", "HP", "Dell", "Acer", "Asus", "MSI", "Medion"],
+        "brandsCue": 2
       },
       "lines": [
-        { "sub": "Ihr technischer Ansprechpartner für den ganzen Lebenszyklus Ihrer Geräte.", "say": "Ihr technischer Ansprechpartner für den ganzen Lebenszyklus Ihrer Geräte." },
-        { "sub": "PLATZHALTER Hersteller", "say": "PLATZHALTER" },
-        { "sub": "PLATZHALTER Kategorien", "say": "PLATZHALTER" }
+        { "sub": "Ihr technischer Ansprechpartner für den ganzen Lebenszyklus Ihrer Geräte." },
+        { "sub": "Repariert werden Geräte von 13 Herstellern:", "say": "Repariert werden Geräte von dreizehn Herstellern:" },
+        { "sub": "Apple, Samsung, Xiaomi, Google, Huawei und Sony, dazu Lenovo, HP, Dell, Acer, Asus, MSI und Medion." },
+        { "sub": "Und das in sechs Gerätekategorien." }
+      ]
+    },
+    {
+      "id": "kategorien",
+      "type": "grid",
+      "data": {
+        "eyebrow": "6 Gerätekategorien",
+        "title": "Was repariert wird",
+        "columns": 3,
+        "compact": true,
+        "items": [
+          { "icon": "smartphone", "title": "Smartphones", "text": "iPhone, Samsung Galaxy, Xiaomi, Google und mehr", "cue": 0 },
+          { "icon": "tablet", "title": "Tablets", "text": "iPad und Android-Tablets", "cue": 0 },
+          { "icon": "watch", "title": "Smartwatches", "text": "Uhren und Wearables", "cue": 1 },
+          { "icon": "laptop", "title": "Notebooks", "text": "Windows-Laptops und MacBooks", "cue": 1 },
+          { "icon": "desktop", "title": "PCs", "text": "Komplettsysteme und selbst gebaute Rechner", "cue": 1 },
+          { "icon": "console", "title": "Konsolen", "text": "Spielkonsolen", "cue": 2 }
+        ]
+      },
+      "lines": [
+        { "sub": "Smartphones und Tablets," },
+        { "sub": "Smartwatches, Notebooks und PCs," },
+        { "sub": "und sogar Spielkonsolen." }
+      ]
+    },
+    {
+      "id": "reparaturen-mobil",
+      "type": "chips",
+      "data": {
+        "eyebrow": "Smartphone & Tablet",
+        "title": "Reparaturarten",
+        "columns": 3,
+        "itemsCue": 0,
+        "stagger": 0.32,
+        "items": ["Displaytausch", "Akkuwechsel", "Backcover & Rückglas", "Ladebuchse", "Lautsprecher & Ton", "Kamera", "Wasserschaden", "Platinenreparatur", "Datenrettung", "Software-Probleme"]
+      },
+      "lines": [
+        { "sub": "Bei Smartphones und Tablets: Displaytausch, Akkuwechsel, Backcover und Rückglas, Ladebuchse, Lautsprecher und Kamera." },
+        { "sub": "Dazu Wasserschäden, Reparaturen auf der Hauptplatine, Datenrettung und Hilfe bei Software-Problemen." },
+        { "sub": "Viele Reparaturen sind bei vorrätigem Ersatzteil oft am selben Tag fertig." }
+      ]
+    },
+    {
+      "id": "reparaturen-computer",
+      "type": "chips",
+      "data": {
+        "eyebrow": "Computer & Notebook",
+        "title": "Reparaturarten",
+        "columns": 3,
+        "itemsCue": 0,
+        "stagger": 0.3,
+        "items": ["Systemoptimierung", "Festplattentausch & SSD-Upgrade", "Notebook-Akkutausch", "Viren- & Malware-Prüfung", "Daten klonen & einrichten", "Neuen PC einrichten", "Fernwartung", "Express-Service", "Vor-Ort-Service"]
+      },
+      "lines": [
+        { "sub": "Bei Computern und Notebooks: Systemoptimierung, Festplattentausch und SSD-Upgrade, Notebook-Akkutausch," },
+        { "sub": "Viren- und Malware-Prüfung, Daten klonen und einrichten, und die Einrichtung neuer PCs." },
+        { "sub": "In der Werkstatt, per Fernwartung, als Express-Service oder direkt bei Ihnen vor Ort." }
+      ]
+    },
+    {
+      "id": "dienstleistungen",
+      "type": "grid",
+      "data": {
+        "eyebrow": "Mehr als Reparatur",
+        "title": "Dienstleistungen",
+        "columns": 4,
+        "compact": true,
+        "items": [
+          { "icon": "transfer", "title": "Technische Unterstützung", "text": "Datenübertragung, Einrichtung, Kaufberatung", "cue": 0 },
+          { "icon": "data", "title": "Datenrettung & Transfer", "text": "Sicher auf Ihr Neugerät", "cue": 0 },
+          { "icon": "refurbished", "title": "Refurbished-Geräte", "text": "Geprüft, mit 12 Monaten Garantie", "cue": 1 },
+          { "icon": "shield", "title": "Ankauf & Inzahlungnahme", "text": "Mit sicherer Datenlöschung", "cue": 1 },
+          { "icon": "business", "title": "IT-Service für Geschäftskunden", "text": "Fester Ansprechpartner, Vor-Ort nach Vereinbarung", "cue": 2 },
+          { "icon": "leaf", "title": "B2B & ESG-Zertifikat", "text": "Nachweis für Ihre Nachhaltigkeit", "cue": 2 },
+          { "icon": "doc", "title": "Versicherungsschäden", "text": "Kostenvoranschläge und Abwicklung", "cue": 3 },
+          { "icon": "case", "title": "Zubehör", "text": "Hüllen, Schutzglas, Kabel", "cue": 3 }
+        ]
+      },
+      "lines": [
+        { "sub": "Technische Unterstützung: Datenübertragung, Einrichtung und Beratung, ganz ohne Fachchinesisch." },
+        { "sub": "Geprüfte Refurbished-Geräte mit 12 Monaten Garantie und fairer Ankauf Ihrer Altgeräte mit sicherer Datenlöschung.", "say": "Geprüfte Refurbished-Geräte mit zwölf Monaten Garantie, und fairer Ankauf Ihrer Altgeräte mit sicherer Datenlöschung." },
+        { "sub": "IT-Service für Geschäftskunden und ein ESG-Zertifikat für Ihre Nachhaltigkeitsberichte." },
+        { "sub": "Dazu die Abwicklung von Versicherungsschäden und passendes Zubehör." },
+        { "sub": "In Vorbereitung: moderne Telefonanlagen für Unternehmen." }
+      ]
+    },
+    {
+      "id": "ablauf",
+      "type": "steps",
+      "data": {
+        "eyebrow": "Fünf klare Schritte",
+        "title": "So läuft Ihre Reparatur ab",
+        "lineDur": 22,
+        "items": [
+          { "title": "Schaden schildern", "text": "Online oder telefonisch.", "cue": 1 },
+          { "title": "Analyse & Diagnose", "text": "Systematisch in der Werkstatt in Koblenz.", "cue": 2 },
+          { "title": "Kostenvoranschlag", "text": "Transparent. Repariert wird erst nach Ihrer Freigabe.", "cue": 3 },
+          { "title": "Sorgfältige Reparatur", "text": "Hochwertige Ersatzteile, Ihre Daten geschützt.", "cue": 4 },
+          { "title": "Abholung & Übergabe", "text": "Geprüftes Gerät plus Tipps für ein langes Leben.", "cue": 5 }
+        ]
+      },
+      "lines": [
+        { "sub": "So läuft Ihre Reparatur ab, in fünf klaren Schritten." },
+        { "sub": "Erstens: Sie schildern Ihr Anliegen, online oder telefonisch." },
+        { "sub": "Zweitens: Ihr Gerät wird in der Werkstatt in Koblenz systematisch analysiert." },
+        { "sub": "Drittens: Sie erhalten einen klaren Kostenvoranschlag. Repariert wird erst nach Ihrer Freigabe." },
+        { "sub": "Viertens: Die sorgfältige Reparatur mit hochwertigen Ersatzteilen, Ihre Daten bleiben geschützt." },
+        { "sub": "Fünftens: Sie holen Ihr geprüftes Gerät ab, mit Tipps für eine lange Lebensdauer." }
+      ]
+    },
+    {
+      "id": "inhaber",
+      "type": "owner",
+      "data": {
+        "portrait": "assets/portrait.png",
+        "eyebrow": "Der Inhaber",
+        "name": "Tobias Christmann",
+        "role": "Servicetechniker · Inhaber von TC Service &amp; Repair",
+        "facts": [
+          { "value": "4+ Jahre", "label": "Servicetechniker-Praxis", "cue": 1 },
+          { "value": "~130", "label": "Reparaturen im Monat", "cue": 1 },
+          { "value": "1", "label": "fester Ansprechpartner", "cue": 3 }
+        ],
+        "points": [
+          { "text": "Ausbildung zum Bürokaufmann", "cue": 1 },
+          { "text": "Über vier Jahre Servicetechniker mit eigenverantwortlicher Werkstattführung", "cue": 1 },
+          { "text": "Seit 2026 im eigenen Betrieb in Koblenz", "cue": 2 },
+          { "text": "Ehrlichkeit vor Umsatz, Transparenz vor der Freigabe, Datensicherheit als Selbstverständlichkeit", "cue": 3 }
+        ]
+      },
+      "lines": [
+        { "sub": "Hinter TC Service & Repair steht Inhaber Tobias Christmann." },
+        { "sub": "Gelernter Bürokaufmann und seit über vier Jahren Servicetechniker, mit rund 130 Reparaturen im Monat.", "say": "Gelernter Bürokaufmann, und seit über vier Jahren Servicetechniker, mit rund hundertdreißig Reparaturen im Monat." },
+        { "sub": "Seit 2026 repariert er im eigenen Betrieb in Koblenz.", "say": "Seit zweitausendsechsundzwanzig repariert er im eigenen Betrieb in Koblenz." },
+        { "sub": "Sein Versprechen: Ehrlichkeit vor Umsatz, Transparenz vor der Freigabe und Datensicherheit als Selbstverständlichkeit." },
+        { "sub": "Bei ihm sprechen Sie direkt mit dem Techniker, nicht mit einer Hotline." }
+      ]
+    },
+    {
+      "id": "kontakt",
+      "type": "outro",
+      "data": {
+        "logo": "assets/logo.png",
+        "brand": "TC Service &amp; Repair",
+        "claim": "Reparieren können viele. Wir können mehr.",
+        "cta": "Termin anfragen",
+        "ctaCue": 1,
+        "contactCue": 2,
+        "contact": ["Eduard-Müller-Str. 36, 56073 Koblenz", "+49 151 20213835", "Mo–Fr 9–19 Uhr · Sa 9–15 Uhr"],
+        "domain": "tc-repair.de"
+      },
+      "hold": 1.5,
+      "lines": [
+        { "sub": "TC Service & Repair, Eduard-Müller-Straße 36 in Koblenz." },
+        { "sub": "Fragen Sie jetzt Ihren Termin an," },
+        { "sub": "unter tc-repair.de oder telefonisch.", "say": "unter tc-repair.de, oder telefonisch." }
       ]
     }
   ]

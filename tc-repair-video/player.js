@@ -22,6 +22,10 @@
     home: '<path d="M12 46L48 16l36 30"/><path d="M22 40v42h52V40"/><path d="M40 82V60h16v22"/>',
     shield: '<path d="M48 10l32 12v22c0 22-14 36-32 42-18-6-32-20-32-42V22z"/><path d="M34 48l10 10 18-20"/>',
     data: '<ellipse cx="48" cy="22" rx="30" ry="10"/><path d="M18 22v52c0 6 14 10 30 10s30-4 30-10V22M18 48c0 6 14 10 30 10s30-4 30-10"/>',
+    doc: '<path d="M22 8h36l16 16v64H22z"/><path d="M58 8v16h16M32 44h32M32 56h32M32 68h20"/>',
+    lock: '<rect x="18" y="42" width="60" height="44" rx="5"/><path d="M30 42V30a18 18 0 0 1 36 0v12M48 58v12"/>',
+    eye: '<path d="M6 48s16-26 42-26 42 26 42 26-16 26-42 26S6 48 6 48z"/><circle cx="48" cy="48" r="12"/>',
+    case: '<rect x="26" y="8" width="44" height="80" rx="10"/><circle cx="40" cy="24" r="6"/><path d="M14 30v36M82 30v36"/>',
     chip: '<rect x="24" y="24" width="48" height="48" rx="4"/><rect x="38" y="38" width="20" height="20"/><path d="M36 24V12M48 24V12M60 24V12M36 84V72M48 84V72M60 84V72M24 36H12M24 48H12M24 60H12M84 36H72M84 48H72M84 60H72"/>',
   };
   const icon = (name) => `<svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter">${ICONS[name] || ICONS.chip}</svg>`;
@@ -111,12 +115,11 @@
       const w = h('div', 'wrap');
       w.appendChild(h('div', 'eyebrow', d.eyebrow, { type: 'fade', cue: 0 }));
       w.appendChild(h('div', 'h2', d.title, { type: 'up', cue: 0, delay: 0.15 }));
-      const g = h('div', 'grid');
+      const g = h('div', 'grid' + (d.compact ? ' compact' : ''));
       g.style.gridTemplateColumns = `repeat(${d.columns || 4}, 1fr)`;
       d.items.forEach((it, i) => {
         const card = h('div', 'card', null, { type: 'up', cue: it.cue ?? d.itemsCue ?? 1, delay: it.cue != null ? 0 : i * (d.stagger ?? 0.18) });
         card.innerHTML = icon(it.icon) + `<div class="t">${it.title}</div>` + (it.text ? `<div class="d">${it.text}</div>` : '');
-        if (d.compact) card.style.minHeight = '0';
         g.appendChild(card);
       });
       w.appendChild(g);
@@ -161,10 +164,16 @@
     owner(s, d) {
       s.appendChild(trace('br', 0.2));
       const o = h('div', 'owner');
-      const f = h('div', 'portrait-frame', null, { type: 'scale', cue: 0, dur: 0.9 });
-      if (d.portrait) { const img = document.createElement('img'); img.src = d.portrait; img.alt = d.name; f.appendChild(img); }
-      else f.appendChild(h('div', 'ph', d.initials || 'TC'));
-      o.appendChild(f);
+      if (d.portrait) {
+        const f = h('div', 'portrait-frame', null, { type: 'scale', cue: 0, dur: 0.9 });
+        const img = document.createElement('img'); img.src = d.portrait; img.alt = d.name; f.appendChild(img);
+        o.appendChild(f);
+      } else {
+        // Ohne Porträtfoto: Kennzahlen-Spalte statt Bild
+        const f = h('div', 'facts');
+        d.facts.forEach((x, i) => f.appendChild(h('div', 'fact', `<div class="v">${x.value}</div><div class="l">${x.label}</div>`, { type: 'up', cue: x.cue ?? 0, delay: 0.3 + i * 0.2 })));
+        o.appendChild(f);
+      }
       const txt = h('div');
       txt.appendChild(h('div', 'eyebrow', d.eyebrow, { type: 'fade', cue: 0, delay: 0.2 }));
       txt.appendChild(h('div', 'name', d.name, { type: 'up', cue: 0, delay: 0.35 }));

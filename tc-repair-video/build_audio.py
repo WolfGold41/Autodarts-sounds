@@ -27,6 +27,18 @@ TAIL = 2.5           # Stille nach dem letzten Satz
 MAX_CUE_CHARS = 74   # max. Zeichen pro Untertitel-Einblendung (2 Zeilen)
 
 
+# Aussprache-Lexikon: Wort -> Ersatz (Text oder [[ IPA ]] für Piper/espeak)
+def load_lexicon(content):
+    lex = content.get("lexicon", {})
+    return sorted(lex.items(), key=lambda kv: -len(kv[0]))
+
+
+def speakable(text, lexicon):
+    for word, repl in lexicon:
+        text = re.sub(r"(?<![\wÄÖÜäöüß])" + re.escape(word) + r"(?![\wÄÖÜäöüß])", repl, text)
+    return text.replace("&", "und").replace("–", ",").replace("·", ",")
+
+
 def synth(text, out, length_scale):
     cmd = [sys.executable, "-m", "piper", "-m", str(VOICE), "-f", str(out), "--length-scale", str(length_scale)]
     subprocess.run(cmd, input=text.encode("utf-8"), check=True, capture_output=True)
@@ -69,6 +81,7 @@ def srt_time(t):
 def main():
     content = json.loads((ROOT / "content.json").read_text(encoding="utf-8"))
     length_scale = content.get("voice", {}).get("lengthScale", 1.0)
+    lexicon = load_lexicon(content)
     BUILD.mkdir(exist_ok=True)
     tmp = BUILD / "tts"
     tmp.mkdir(exist_ok=True)
@@ -88,7 +101,7 @@ def main():
         lines = []
         for li, line in enumerate(scene["lines"]):
             wav = tmp / f"{si:02d}_{li:02d}.wav"
-            synth(line.get("say", line["sub"]), wav, line.get("lengthScale", length_scale))
+            synth(speakable(line.get("say", line["sub"]), lexicon), wav, line.get("lengthScale", length_scale))
             r, c, s, frames = read_wav(wav)
             if rate is None:
                 rate, ch, sw = r, c, s
